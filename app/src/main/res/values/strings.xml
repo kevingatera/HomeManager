@@ -3,4 +3,7 @@
     <string name="title_activity_quick_access">QuickAccess</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="hello">Hello You</string>
+    <string name="usernameLabel">Username</string>
+    <string name="passwordLabel">Password</string>
 </resources>
