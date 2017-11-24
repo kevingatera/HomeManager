@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="besmart.team.homemanager.Main2Activity">
+    tools:context="besmart.team.homemanager.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +41,8 @@
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:typeface="normal" />
+                    android:typeface="normal"
+                    tools:ignore="RtlCompat" />
 
                 <Switch
                     android:layout_width="wrap_content"

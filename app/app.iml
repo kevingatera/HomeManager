@@ -109,7 +109,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/split-apk" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/splits-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
@@ -162,5 +161,6 @@
     <orderEntry type="library" name="com.google.firebase:firebase-analytics-impl-11.0.4" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-auth-11.0.4" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-base-11.0.4" level="project" />
+    <orderEntry type="library" name="android-android-26" level="project" />
   </component>
 </module>
