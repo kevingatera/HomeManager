@@ -36,6 +36,7 @@ public class fragment_main_tasks extends Fragment {
     /* adding the firebase */
 
     ArrayList<String> myArrayList = new ArrayList<>();
+    ArrayList<TestTask> myTaskList;
     ListView myListView;
     // SwipeMenuListView myListView;
 
@@ -51,60 +52,28 @@ public class fragment_main_tasks extends Fragment {
     }
 
 
-
     // retrieve data and populate upon startup of the app
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , myArrayList);
+        myTaskList = new ArrayList<>();
 
-        // myListView = (SwipeMenuListView) view.findViewById(R.id.list);
+
+        myTaskList.add(new TestTask(R.drawable.ic_delete, "Take the dog out", "Today"));
+        myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Call the veterinary", "Today"));
+        myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Take the garbage out", "Sunday"));
+        myTaskList.add(new TestTask(R.drawable.ic_delete, "Take the dog out", "Tomorrow"));
+        myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Prepare dinner", "2 hours"));
+
+        final CustomListAdapter myArrayAdapter = new CustomListAdapter(getActivity(), R.layout.list_item, myTaskList);
+
+        // final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , myArrayList);
+
+        // myListView = (SwipeMenuListView) view.findViewById(R.id.list); */
         myListView = (ListView) view.findViewById(R.id.list);
         myListView.setAdapter(myArrayAdapter);
 
-        /*
-
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
-
-            @Override
-            public void create(SwipeMenu menu) {
-                // create "open" item
-                SwipeMenuItem openItem = new SwipeMenuItem(
-                        getActivity().getApplicationContext());
-                // set item background
-                openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
-                        0xCE)));
-                // set item width
-                openItem.setWidth(170);
-                // set item title
-                openItem.setTitle("Open");
-                // set item title fontsize
-                openItem.setTitleSize(18);
-                // set item title font color
-                openItem.setTitleColor(Color.WHITE);
-                // add to menu
-                menu.addMenuItem(openItem);
-
-                // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(
-                        getActivity().getApplicationContext());
-                // set item background
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
-                        0x3F, 0x25)));
-                // set item width
-                deleteItem.setWidth(170);
-                // set a icon
-                deleteItem.setIcon(R.drawable.ic_delete);
-                // add to menu
-                menu.addMenuItem(deleteItem);
-            }
-        };
-
-        // add the swipingAdapter to the listView
-        myListView.setMenuCreator(creator);
-
-        */
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -138,8 +107,8 @@ public class fragment_main_tasks extends Fragment {
         // Write a message to the database
         // DatabaseReference myRef = database.getReference("test");
         // myRef.setValue("Hello, World!");
-
     }
+}
 
     /*
 
@@ -180,9 +149,6 @@ public class fragment_main_tasks extends Fragment {
     singleton
 
     */
-
-
-}
 
 
 
