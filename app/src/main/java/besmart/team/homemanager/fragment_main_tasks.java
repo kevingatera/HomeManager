@@ -1,29 +1,18 @@
 package besmart.team.homemanager;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.baoyz.swipemenulistview.SwipeMenu;
-import com.baoyz.swipemenulistview.SwipeMenuCreator;
-import com.baoyz.swipemenulistview.SwipeMenuItem;
-import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 
 import java.util.ArrayList;
 
@@ -60,10 +49,10 @@ public class fragment_main_tasks extends Fragment {
         myTaskList = new ArrayList<>();
 
 
-        myTaskList.add(new TestTask(R.drawable.ic_delete, "Take the dog out", "Today"));
+        myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Take the dog out", "Today"));
         myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Call the veterinary", "Today"));
         myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Take the garbage out", "Sunday"));
-        myTaskList.add(new TestTask(R.drawable.ic_delete, "Take the dog out", "Tomorrow"));
+        myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Take the dog out", "Tomorrow"));
         myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Prepare dinner", "2 hours"));
 
         final CustomListAdapter myArrayAdapter = new CustomListAdapter(getActivity(), R.layout.list_item, myTaskList);
@@ -109,46 +98,3 @@ public class fragment_main_tasks extends Fragment {
         // myRef.setValue("Hello, World!");
     }
 }
-
-    /*
-
-    public class TaskArrayAdapter extends ArrayAdapter<String>  {
-        private final Context context;
-        private final String[] values;
-
-        public TaskArrayAdapter(Context context, String[] values) {
-            super(context, R.layout.list_team_layout, values);
-            this.context = context;
-            this.values = values;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View rowView = inflater.inflate(R.layout.list_team_layout, parent, false);
-            TextView textView = (TextView) rowView.findViewById(R.id.line01);
-            ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-            textView.setText(values[position]);
-            // Change the icon for Windows and iPhone
-            String s = values[position];
-            if (s == null || s.isEmpty() || s.equals("empty")) {
-                imageView.setImageResource(R.drawable.ic_logo_empty);
-            } else {
-                imageView.setImageResource(R.drawable.ic_logo_mil);
-            }
-            return rowView;
-        }
-    }
-    RÉSULTAT
-            resultOfPreviousSlide
-    GESTION DE MÉMOIRE
-    Un patron de conceptions utiles dans la gestion d'application et de mémoire est le Singleton.
-    SINGLETON
-    Patron de conception utile pour stocker les informations.
-    Une limite d'un seul instance assure la cohérence entre vos attentes et la réalité entre lecture / écriture.
-    singleton
-
-    */
-
-
-
