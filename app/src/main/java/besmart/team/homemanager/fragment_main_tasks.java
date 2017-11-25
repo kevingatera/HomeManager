@@ -16,6 +16,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import besmart.team.homemanager.logic.Task;
+
 /**
  * Created by kevingatera on 22/11/17.
  */
@@ -25,12 +27,12 @@ public class fragment_main_tasks extends Fragment {
     /* adding the firebase */
 
     ArrayList<String> myArrayList = new ArrayList<>();
-    ArrayList<TestTask> myTaskList;
+    ArrayList<Task> myTaskList;
     ListView myListView;
     // SwipeMenuListView myListView;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
+    DatabaseReference myRef = database.getReference("/tasks");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,42 +51,40 @@ public class fragment_main_tasks extends Fragment {
         myTaskList = new ArrayList<>();
 
 
-        myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Take the dog out", "Today"));
-        myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Call the veterinary", "Today"));
-        myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Take the garbage out", "Sunday"));
-        myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Take the dog out", "Tomorrow"));
-        myTaskList.add(new TestTask(R.drawable.ic_launcher_background, "Prepare dinner", "2 hours"));
+        final CustomListAdapter myListAdapter = new CustomListAdapter(getActivity(), R.layout.list_item, myTaskList);
 
-        final CustomListAdapter myArrayAdapter = new CustomListAdapter(getActivity(), R.layout.list_item, myTaskList);
-
-        // final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , myArrayList);
-
-        // myListView = (SwipeMenuListView) view.findViewById(R.id.list); */
         myListView = (ListView) view.findViewById(R.id.list);
-        myListView.setAdapter(myArrayAdapter);
+        myListView.setAdapter(myListAdapter);
 
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String myChildValues = dataSnapshot.getValue(String.class);
-                myArrayList.add(myChildValues);
-                myArrayAdapter.notifyDataSetChanged();
+
+//                for(DataSnapshot taskSnapshot : dataSnapshot.getChildren()){
+                    Task task = dataSnapshot.getValue(Task.class);
+                    myTaskList.add(task);
+//                }
+
+                // String myChildValues = dataSnapshot.getValue(String.class);
+                // System.out.println(myChildValues);
+                // myArrayList.add(myChildValues);
+                 myListAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                myArrayAdapter.notifyDataSetChanged();
+                myListAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                myArrayAdapter.notifyDataSetChanged();
+                myListAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+                myListAdapter.notifyDataSetChanged();
             }
 
             @Override

@@ -29,6 +29,7 @@
                     android:layout_height="44dp"
                     android:layout_weight="1"
                     android:background="@android:drawable/ic_menu_add" />
+                    <!--android:onClick="createNewTask" /> -->
 
                 <TextView
                     android:id="@+id/new_taskView"

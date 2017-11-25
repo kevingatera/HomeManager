@@ -1,5 +1,6 @@
 package besmart.team.homemanager;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import besmart.team.homemanager.logic.Task;
+import besmart.team.homemanager.logic.TaskList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -82,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /* Called when the user taps on */
+    public void createNewTask(View view) {
+        Intent intent = new Intent(this, Task.class);
+        startActivity(intent);
     }
 
 

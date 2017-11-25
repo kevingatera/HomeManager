@@ -49,8 +49,8 @@ public class fragment_main_shopping extends Fragment {
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String myChildValues = dataSnapshot.getValue(String.class);
-                myArrayList.add(myChildValues);
+//                String myChildValues = dataSnapshot.getValue(String.class);
+//                myArrayList.add(myChildValues);
                 myArrayAdapter.notifyDataSetChanged();
             }
 
