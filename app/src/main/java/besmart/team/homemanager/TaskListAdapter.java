@@ -18,19 +18,21 @@ import java.util.List;
  * Created by kevingatera on 23/11/17.
  */
 
-public class CustomListAdapter extends ArrayAdapter<Task> {
+public class TaskListAdapter extends ArrayAdapter<Task> {
 
     Context myContext;
     int resource;
     List<Task> taskList;
 
 
-    public CustomListAdapter(Context myContext, int resource, List<Task> taskList){
+    public TaskListAdapter(Context myContext, int resource, List<Task> taskList){
         super(myContext, resource, taskList);
         this.myContext = myContext;
         this.resource = resource;
         this.taskList = taskList;
     }
+
+
 
     @NonNull
     @Override
@@ -41,8 +43,8 @@ public class CustomListAdapter extends ArrayAdapter<Task> {
         TextView taskName = view.findViewById(R.id.taskTitle);
         TextView taskDueDate = view.findViewById(R.id.taskDueDate);
         ImageView imageView = view.findViewById(R.id.imageView);
-        System.out.println("Position is => " + Integer.toString(position));
-        System.out.println("The list has => " + Integer.toString(taskList.size()) + " items");
+//        System.out.println("Position is => " + Integer.toString(position));
+//        System.out.println("The list has => " + Integer.toString(taskList.size()) + " items");
         Task t = taskList.get(position);
         taskName.setText(t.getTitle());
         taskDueDate.setText(t.getDueDate());

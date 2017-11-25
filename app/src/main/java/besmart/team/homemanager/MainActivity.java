@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import besmart.team.homemanager.logic.Task;
-import besmart.team.homemanager.logic.TaskList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                System.out.println("Booyasaaaaaaaaaaaaaaaaaaaaaaaaaaaah");
+                startActivity(new Intent(MainActivity.this, TaskActivity.class));
             }
         });
 
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment_main_tasks tab2 = new fragment_main_tasks();
                     return tab2;
                 case 2:
-                    fragment_main_people tab3 = new fragment_main_people();
+                    fragment_main_family tab3 = new fragment_main_family();
                     return tab3;
                 default:
                     return null;
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return "Tasks";
                 case 2:
-                    return "People";
+                    return "Family";
             }
             return null;
         }

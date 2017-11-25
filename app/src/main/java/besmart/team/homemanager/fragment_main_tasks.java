@@ -32,7 +32,7 @@ public class fragment_main_tasks extends Fragment {
     // SwipeMenuListView myListView;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("/tasks");
+    DatabaseReference myRef = database.getReference("/task");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +51,7 @@ public class fragment_main_tasks extends Fragment {
         myTaskList = new ArrayList<>();
 
 
-        final CustomListAdapter myListAdapter = new CustomListAdapter(getActivity(), R.layout.list_item, myTaskList);
+        final TaskListAdapter myListAdapter = new TaskListAdapter(getActivity(), R.layout.list_item, myTaskList);
 
         myListView = (ListView) view.findViewById(R.id.list);
         myListView.setAdapter(myListAdapter);
