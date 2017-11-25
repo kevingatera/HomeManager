@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="111dp"
+        android:layout_height="79dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -16,6 +16,7 @@
             android:layout_width="247dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:scaleType="matrix"
             app:srcCompat="@android:drawable/ic_menu_report_image"
             tools:layout_editor_absoluteX="7dp"
             tools:layout_editor_absoluteY="16dp" />
@@ -33,7 +34,7 @@
                 android:layout_weight="1"
                 android:text="userNameLabel"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="56dp"
                 tools:layout_editor_absoluteY="16dp" />
@@ -43,8 +44,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score"
+                android:text="Score:"
                 android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="18sp"
                 tools:layout_editor_absoluteX="56dp"
                 tools:layout_editor_absoluteY="49dp" />
 

@@ -45,11 +45,11 @@ public class UserListAdapter extends ArrayAdapter<User> {
         TextView userNameLabel = view.findViewById(R.id.userNameLabel);
         TextView userScoreLabel = view.findViewById(R.id.userScoreLabel);
         ImageView imageFamilyMember = view.findViewById(R.id.imageFamilyMember);
-        System.out.println("Position is => " + Integer.toString(position));
-        System.out.println("The list has => " + Integer.toString(userList.size()) + " items");
+//        System.out.println("Position is => " + Integer.toString(position));
+//        System.out.println("The list has => " + Integer.toString(userList.size()) + " items");
         User user = userList.get(position);
         userNameLabel.setText(user.getName());
-        userScoreLabel.setText(user.gettotalScore());
+        userScoreLabel.setText("Score : " + user.gettotalScore());
         imageFamilyMember.setImageDrawable(myContext.getResources().getDrawable(R.drawable.ic_launcher_background));
 
 //        view.findViewById(R.id.buttonTaskDone).setOnClickListener(new View.OnClickListener() {

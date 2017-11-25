@@ -51,7 +51,7 @@ public class fragment_main_tasks extends Fragment {
         myTaskList = new ArrayList<>();
 
 
-        final TaskListAdapter myListAdapter = new TaskListAdapter(getActivity(), R.layout.list_item, myTaskList);
+        final TaskListAdapter myListAdapter = new TaskListAdapter(getActivity(), R.layout.list_task, myTaskList);
 
         myListView = (ListView) view.findViewById(R.id.list);
         myListView.setAdapter(myListAdapter);
