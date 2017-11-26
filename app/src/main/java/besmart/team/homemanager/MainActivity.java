@@ -20,6 +20,8 @@ import besmart.team.homemanager.logic.Task;
 
 public class MainActivity extends AppCompatActivity {
 
+    private boolean onlyMyTasks = false;
+
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +62,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                System.out.println("Booyasaaaaaaaaaaaaaaaaaaaaaaaaaaaah");
                 startActivity(new Intent(MainActivity.this, TaskActivity.class));
             }
         });
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,8 +87,23 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        if(id ==  R.id.checkable_menu) {
+            onlyMyTasks = !item.isChecked();
+            item.setChecked(onlyMyTasks);
+            return true;
+        }
+
+        // return super.onOptionsItemSelected(item);
+        return false;
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+        MenuItem checkable = menu.findItem(R.id.checkable_menu);
+        checkable.setChecked(onlyMyTasks);
+        return true;
+    }
+
 
     /* Called when the user taps on */
     public void createNewTask(View view) {

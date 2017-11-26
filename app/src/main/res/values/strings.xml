@@ -21,4 +21,5 @@
         completions."
     </string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="only_my_tasks">Only show my tasks</string>
 </resources>
