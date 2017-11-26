@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "582454949698",
+    "firebase_url": "https://homemanager-667e6.firebaseio.com",
+    "project_id": "homemanager-667e6",
+    "storage_bucket": "homemanager-667e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582454949698:android:361b2baf35b263d7",
+        "android_client_info": {
+          "package_name": "besmart.team.homemanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582454949698-qnfhpgodj6elh9po86ra78c9l3rv08tp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "besmart.team.homemanager",
+            "certificate_hash": "a9c96032a608544eeec8365a67c2132196dc6242"
+          }
+        },
+        {
+          "client_id": "582454949698-brmg3kldobnd14vaeuor1e0fhapp0enc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM553gg3Qutkv20w30va5m7zPn5SOzNVo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582454949698-brmg3kldobnd14vaeuor1e0fhapp0enc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

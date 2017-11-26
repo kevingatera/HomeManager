@@ -14,7 +14,7 @@ import java.util.Queue;
  */
 
 public class Task {
-	
+	private String id;
 	private String title;
 	private String creationDate;
 	private String dueDate;
@@ -66,6 +66,14 @@ public class Task {
         this.description = description;
         this.note = note;
         this.score = score;
+    }
+
+    public Task(String id, String title, String description, String score, String dueDate) {
+		this.id = id;
+    	this.title = title;
+		this.description = description;
+		this.dueDate = dueDate;
+		this.score = score;
     }
 
     //setters
