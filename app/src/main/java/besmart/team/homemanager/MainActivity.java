@@ -16,11 +16,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import besmart.team.homemanager.logic.Task;
 
 public class MainActivity extends AppCompatActivity {
 
     private boolean onlyMyTasks = false;
+
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -93,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if(id == R.id.logOutButton) {
+            return true;
+        }
+
         // return super.onOptionsItemSelected(item);
         return false;
     }
@@ -109,6 +118,13 @@ public class MainActivity extends AppCompatActivity {
     public void createNewTask(View view) {
         Intent intent = new Intent(this, Task.class);
         startActivity(intent);
+    }
+
+    public void logOut(MenuItem view) {
+        FirebaseAuth.getInstance().signOut();
+        System.out.println("Signing out");
+        finish();
+        startActivity(new Intent(this, SigninActivity.class));
     }
 
 

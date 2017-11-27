@@ -13,58 +13,23 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:fillViewport="true">
 
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="44dp"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<Button-->
-                    <!--style="@style/Widget.AppCompat.Button.Borderless"-->
-                    <!--android:layout_width="28dp"-->
-                    <!--android:layout_height="44dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@android:drawable/ic_menu_add" />-->
-                    <!--&lt;!&ndash;android:onClick="createNewTask" /> &ndash;&gt;-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/new_taskView"-->
-                    <!--android:layout_width="133dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="New Task"-->
-                    <!--android:textAlignment="textStart"-->
-                    <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
-                    <!--android:textSize="18sp"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:typeface="normal"-->
-                    <!--tools:ignore="RtlCompat" />-->
-
-                <!--<Switch-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:text="Only show my tasks" />-->
-            <!--</LinearLayout>-->
-
-            <!--<com.baoyz.swipemenulistview.SwipeMenuListView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:id="@+id/list">-->
-
-            <!--</com.baoyz.swipemenulistview.SwipeMenuListView>-->
-
-            <ListView
-                android:id="@+id/list"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <ListView
+                    android:id="@+id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 
     </LinearLayout>
 
