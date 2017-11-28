@@ -1,10 +1,9 @@
 package besmart.team.homemanager;
 
 import android.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class shopping_class extends AppCompatActivity {
+public class shopping_class {
 
     //@Override
     //protected void onCreate(Bundle savedInstanceState) {

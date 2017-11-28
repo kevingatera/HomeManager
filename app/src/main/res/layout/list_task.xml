@@ -30,6 +30,7 @@
             android:layout_weight="1" />
 
         <LinearLayout
+            android:id="@+id/taskRowView"
             android:layout_width="281dp"
             android:layout_height="85dp"
             android:layout_weight="1"

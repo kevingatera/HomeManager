@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,12 +19,12 @@ import java.util.Random;
 
 public class TaskActivity extends AppCompatActivity {
 
-    EditText taskName;
-    EditText taskDescription;
-    EditText taskScore;
-    EditText taskDueDate;
-    Button taskSubmit;
-    DatabaseReference databaseTask;
+    private EditText taskName;
+    private EditText taskDescription;
+    private EditText taskScore;
+    private EditText taskDueDate;
+    private Button taskSubmit;
+    private DatabaseReference databaseTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,6 @@ public class TaskActivity extends AppCompatActivity {
                 addTask();
             }
         });
-
     }
 
     private void addTask() {

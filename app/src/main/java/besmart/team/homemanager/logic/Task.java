@@ -39,25 +39,7 @@ public class Task {
 	}
 
 	//second constructor which take parameters 
-	/*
-    public Task(String title1,
-				String creationDate1,
-				String dueDate1,
-				String description1,
-				String note1,String repeat1,
-				boolean isAssigned1,
-				Queue<Tool> toolQueue1,
-				Integer score1) {
-        title = title1;
-        creationDate = creationDate1;
-        dueDate = dueDate1;
-        description = description1;
-        note = note1;
-        repeat = repeat1;
-        isAssigned = isAssigned1;
-        score = score1;
-        toolQueue = toolQueue1;
-	}*/
+
 
     public Task( String creationDate, String description, String dueDate, String score,  String note, String title) {
         this.title = title;
@@ -106,7 +88,9 @@ public class Task {
 	 }
 	 
 	 //getters
-	 public String getTitle() {
+
+	public String getId() {return id; }
+    public String getTitle() {
 		 return title;
 	 }
 	 public String getCreationDate() {
@@ -148,4 +132,8 @@ public class Task {
 		  task1.isAssigned="false";
 		  task1.toolQueue = null;
 	  }
+
+    public void setid(String id) {
+        this.id = id;
+    }
 }

@@ -63,7 +63,10 @@ public class fragment_main_tasks extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
 //                for(DataSnapshot taskSnapshot : dataSnapshot.getChildren()){
+                System.out.println(dataSnapshot.getKey());
                     Task task = dataSnapshot.getValue(Task.class);
+                    task.setid(dataSnapshot.getKey());
+//                    System.out.println(task);
                     myTaskList.add(task);
 //                }
 
