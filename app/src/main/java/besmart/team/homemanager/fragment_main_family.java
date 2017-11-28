@@ -1,7 +1,7 @@
 package besmart.team.homemanager;
 
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import besmart.team.homemanager.logic.Child;
-import besmart.team.homemanager.logic.Parent;
 import besmart.team.homemanager.logic.User;
 
 /**
