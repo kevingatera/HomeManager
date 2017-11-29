@@ -1,13 +1,18 @@
 package besmart.team.homemanager;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -74,5 +79,33 @@ public class fragment_main_shopping extends Fragment {
 
             }
         });
+
+}
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (this.isVisible()) {
+            Log.e("MyFragment", "\n\n" + this.getClass().getSimpleName() +" IS visible anymore. \n  STARTING audio. \n \n");
+            Activity tempActivity = getActivity();
+            tempActivity.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity(), ShoppingActivity.class));
+                }
+            });
+
+            TextView fabTextView = tempActivity.findViewById(R.id.fabTextView);
+            fabTextView.setText("Add an article");
+
+            // If we are becoming invisible, then...
+            if (!isVisibleToUser) {
+//                Log.e("MyFragment", "\n\n\n\n Not visible anymore.  Stopping audio. \n \n");
+
+            }
+        }
     }
 }
+
+
+// Make sure that we are currently visible

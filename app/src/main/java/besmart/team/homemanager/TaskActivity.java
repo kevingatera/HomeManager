@@ -59,12 +59,12 @@ public class TaskActivity extends AppCompatActivity {
                 !TextUtils.isEmpty(score) &&
                 !TextUtils.isEmpty(dueDate)) {
 
-//            String id = databaseTask.push().getKey();
+            // Generate an id
             Random r = new Random();
             String id = "task" + Integer.toString(r.nextInt(999999-100000) + 100000);
 
             Task task;
-            task = new Task(id, title, description, score, dueDate);
+            task = new Task(title, description, score, dueDate);
 
             databaseTask.child(id).setValue(task);
 

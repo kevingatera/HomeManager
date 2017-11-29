@@ -1,9 +1,11 @@
 package besmart.team.homemanager;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,5 +102,25 @@ public class fragment_main_tasks extends Fragment {
         // Write a message to the database
         // DatabaseReference myRef = database.getReference("test");
         // myRef.setValue("Hello, World!");
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        // Make sure that we are currently visible
+        if (this.isVisible()) {
+            Log.e("MyFragment", "\n\n\n\n IS visible anymore. \n  STARTING audio. \n \n");
+            getActivity().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity(), TaskActivity.class));
+                }
+            });
+            // If we are becoming invisible, then...
+            if (!isVisibleToUser) {
+                //
+            }
+        }
     }
 }
