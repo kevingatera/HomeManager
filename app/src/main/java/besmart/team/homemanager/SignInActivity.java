@@ -69,8 +69,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void performLogin() {
-        String email = loginEmail.getText().toString();
-        String password = loginPassword.getText().toString();
+        String email = loginEmail.getText().toString().trim();
+        String password = loginPassword.getText().toString().trim();
 
         // Check if the username is empty
         if(TextUtils.isEmpty(email)) {

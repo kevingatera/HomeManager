@@ -23,12 +23,13 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="only_my_tasks">Only show my tasks</string>
     <string name="invitation_to_register"><u>Don\'t have an account? Click here to register</u></string>
-    <string name="grocery">Grocery</string>
-    <string name="material_text">Material(s)</string>
+    <string name="grocery">Groceries</string>
+    <string name="material_text">Materials</string>
     <string name="please_enter_item_type_to_buy">Please enter item type to buy !</string>
     <string name="enter_the_quantity_here">Enter the quantity Here</string>
     <string name="enter_the_assignee_here">Enter the assignee Here</string>
     <string name="enter_the_item_name">Enter the item name</string>
     <string name="enter_item_type">Enter item type :</string>
     <string name="confirm">Confirm</string>
+    <string name="add_a_task">Add a task</string>
 </resources>

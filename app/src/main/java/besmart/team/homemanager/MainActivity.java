@@ -2,8 +2,6 @@ package besmart.team.homemanager;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -48,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(user == null) {
+            finish();
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -61,16 +63,6 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                startActivity(new Intent(MainActivity.this, TaskActivity.class));
-            }
-        });
-
     }
 
     @Override
@@ -79,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main2, menu);
         return true;
     }
+    
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -111,13 +104,6 @@ public class MainActivity extends AppCompatActivity {
         MenuItem checkable = menu.findItem(R.id.checkable_menu);
         checkable.setChecked(onlyMyTasks);
         return true;
-    }
-
-
-    /* Called when the user taps on */
-    public void createNewTask(View view) {
-        Intent intent = new Intent(this, Task.class);
-        startActivity(intent);
     }
 
     public void logOut(MenuItem view) {
