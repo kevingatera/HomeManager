@@ -53,12 +53,12 @@
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:orientation="horizontal">
-ss
+
                 <EditText
                     android:id="@+id/nameOfItem"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="#839192"
+                    android:background="#cb0e40"
                     android:hint="@string/enter_the_item_name"
                     android:padding="15dp"
                     android:textColorHint="#fff"
@@ -76,7 +76,7 @@ ss
                     android:id="@+id/QuantityOfItem"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="#839192"
+                    android:background="#cb0e40"
                     android:hint="@string/enter_the_quantity_here"
                     android:padding="15dp"
                     android:textColorHint="#fff"
@@ -92,7 +92,7 @@ ss
                     android:id="@+id/AssigneeOfItem"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="#839192"
+                    android:background= "#cb0e40"
                     android:hint="@string/enter_the_assignee_here"
                     android:padding="15dp"
                     android:textColorHint="#fff"
@@ -101,12 +101,15 @@ ss
 
         <Button
             android:id="@+id/submit_button"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="60dp"
+            android:background= "#839192"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"
+            android:textColorHint="#fff"
             android:layout_marginTop="20dp"
-            android:text="@string/confirm" />
+            android:textStyle="bold"
+            android:hint="Confirm" />
 
     </LinearLayout>
 
