@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShoppingActivity" />
+        <activity android:name=".logic.registration_form"></activity>
     </application>
 
 </manifest>
