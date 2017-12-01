@@ -57,9 +57,9 @@ public class fragment_main_family extends Fragment{
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 for(DataSnapshot familySnapshot : dataSnapshot.getChildren()){
-                    System.out.println("Booyah");
+//                    System.out.println("Booyah");
                     User user = familySnapshot.getValue(User.class);
-                    System.out.println("name is " + user.getName());
+//                    System.out.println("name is " + user.getName());
                     userList.add(user);
                 }
 

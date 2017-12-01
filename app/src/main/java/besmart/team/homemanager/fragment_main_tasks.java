@@ -56,7 +56,7 @@ public class fragment_main_tasks extends Fragment {
 
         final TaskListAdapter myListAdapter = new TaskListAdapter(getActivity(), R.layout.list_task, myTaskList);
 
-        myListView = (ListView) view.findViewById(R.id.list);
+        myListView = view.findViewById(R.id.list);
         myListView.setAdapter(myListAdapter);
 
 
@@ -65,7 +65,6 @@ public class fragment_main_tasks extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
 //                for(DataSnapshot taskSnapshot : dataSnapshot.getChildren()){
-                System.out.println(dataSnapshot.getKey());
                     Task task = dataSnapshot.getValue(Task.class);
                     task.setid(dataSnapshot.getKey());
 //                    System.out.println(task);

@@ -50,7 +50,7 @@ public class Task {
         this.score = score;
     }
 
-    public Task(String id, String title, String description, String score) {
+    public Task(String id, String title, String description, String dueDate, String score) {
 		this.id = id;
     	this.title = title;
 		this.description = description;

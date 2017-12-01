@@ -10,9 +10,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
         if(user == null) {
             finish();
+        }
+
+        else{
+            Log.e("USER IS", user.toString());
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -127,9 +133,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             // Create a switch case to return the fragments
+            TextView fabTextView;
             switch (position) {
                 case 0:
                     fragment_main_shopping tab1 = new fragment_main_shopping();
+                    // Set the text on the fab button
+                    fabTextView = (TextView) findViewById(R.id.fabTextView);
+                    fabTextView.setText("Add an article");
                     return tab1;
                 case 1:
                     fragment_main_tasks tab2 = new fragment_main_tasks();

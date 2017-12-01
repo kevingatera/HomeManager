@@ -20,7 +20,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+
+import besmart.team.homemanager.logic.ShoppingItem;
 
 /**
  * Created by kevingatera on 22/11/17.
@@ -29,16 +33,18 @@ import java.util.ArrayList;
 public class fragment_main_shopping extends Fragment {
 
     /* adding the firebase */
-    ArrayList<String> myArrayList = new ArrayList<>();
-    ListView myListView;
+    ArrayList<ShoppingItem> myGroceryArrayList;
+    ListView myGroceryList;
+
+    ArrayList<ShoppingItem> myMaterialArrayList;
+    ListView myMaterialList;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
+    DatabaseReference myRef = database.getReference("/shopping_items");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView2 = inflater.inflate(R.layout.fragment_main_shopping, container, false);
-
         return rootView2;
     }
 
@@ -46,27 +52,50 @@ public class fragment_main_shopping extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, myArrayList);
+        myGroceryArrayList = new ArrayList<>();
+        myMaterialArrayList = new ArrayList<>();
 
-        myListView = view.findViewById(R.id.list);
-        myListView.setAdapter(myArrayAdapter);
+        final ShoppingItemAdapter m1 = new ShoppingItemAdapter(getActivity(), R.layout.list_item, myGroceryArrayList);
+        final ShoppingItemAdapter m2 = new ShoppingItemAdapter(getActivity(), R.layout.list_item, myMaterialArrayList);
+
+        myGroceryList = view.findViewById(R.id.groceryList);
+        myMaterialList = view.findViewById(R.id.materialList);
+
+        myGroceryList.setAdapter(m1);
+        myMaterialList.setAdapter(m2);
+
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                for(DataSnapshot child : dataSnapshot.getChildren()) {
+
+                    ShoppingItem item = child.getValue(ShoppingItem.class);
+                    if(item.getType().equals("Groceries")){
+                        myGroceryArrayList.add(item);
+                    }
+
+                    else if (item.getType().equals("Materials")) {
+                        myMaterialArrayList.add(item);
+                    }
+//                    System.out.println(dataSnapshot.getValue());
+                }
 //                String myChildValues = dataSnapshot.getValue(String.class);
 //                myArrayList.add(myChildValues);
-                myArrayAdapter.notifyDataSetChanged();
+                m1.notifyDataSetChanged();
+                m2.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                myArrayAdapter.notifyDataSetChanged();
+                m1.notifyDataSetChanged();
+                m2.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                myArrayAdapter.notifyDataSetChanged();
+                m1.notifyDataSetChanged();
+                m2.notifyDataSetChanged();
             }
 
             @Override
@@ -86,7 +115,6 @@ public class fragment_main_shopping extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (this.isVisible()) {
-            Log.e("MyFragment", "\n\n" + this.getClass().getSimpleName() +" IS visible anymore. \n  STARTING audio. \n \n");
             Activity tempActivity = getActivity();
             tempActivity.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
                 @Override

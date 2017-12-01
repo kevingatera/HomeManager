@@ -64,7 +64,7 @@ public class TaskActivity extends AppCompatActivity {
             String id = "task" + Integer.toString(r.nextInt(999999-100000) + 100000);
 
             Task task;
-            task = new Task(title, description, score, dueDate);
+            task = new Task(id, title, description, score, dueDate);
 
             databaseTask.child(id).setValue(task);
 

@@ -65,6 +65,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         if (view == inviteToRegister){
             // Open the registration page
 //            setContentView(R.layout.activity_login);
+            finish();
+            startActivity(new Intent(this, RegistrationActivity.class));
         }
     }
 
@@ -100,6 +102,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
                         else {
+                            Toast.makeText(getApplicationContext(),  "The username or password is invalid.", Toast.LENGTH_LONG).show();
                             System.out.println(task.getException());
                         }
                     }
