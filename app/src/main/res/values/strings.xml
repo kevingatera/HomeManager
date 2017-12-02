@@ -32,4 +32,8 @@
     <string name="enter_item_type">Enter item type :</string>
     <string name="confirm">Confirm</string>
     <string name="add_a_task">Add a task</string>
+    <string name="enter_the_details">Enter the details:</string>
+    <string name="enter_child_name">Enter child name</string>
+    <string name="enter_reward_name">Enter reward name</string>
+    <string name="assign_reward">ASSIGN REWARD</string>
 </resources>
