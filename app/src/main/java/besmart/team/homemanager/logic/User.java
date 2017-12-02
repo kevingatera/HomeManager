@@ -14,13 +14,15 @@ import java.util.LinkedList;
 public class User {
 
 	protected boolean isAuthenticad;
+	protected String id;
 	protected String name;
+	protected String email;
 	protected String gender;
 	protected String age;
 	protected String avatarLocation;
 	protected String totalScore;
 	protected Queue<Task> taskQueue; //list contains tasks
-	
+
 	//first constructor
 	public User() {
 		isAuthenticad=false;
