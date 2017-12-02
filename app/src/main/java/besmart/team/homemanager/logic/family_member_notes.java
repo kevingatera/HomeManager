@@ -10,6 +10,6 @@ public class family_member_notes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_family_member_notes);
+        setContentView(R.layout.family_member_notes);
     }
 }
