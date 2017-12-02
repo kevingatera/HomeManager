@@ -107,23 +107,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 });
 
-       /*firebaseAuth.createUserWithEmailAndPassword(email, password)
-               .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                   @Override
-                   public void onComplete(@NonNull Task<AuthResult> task) {
-                       if (task.isSuccessful()){
-                           progressDialog.dismiss();
-                           FirebaseUser user = firebaseAuth.getCurrentUser();
-                           System.out.println("USER CREATEDDDDD!!!!!!!!!!!!!");
-                       }
-
-                       else {
-                           System.out.println("User not created" + task.getException());
-                       }
-
-                   }
-               });*/
-
 
 
     }

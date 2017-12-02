@@ -47,15 +47,9 @@ public class ShoppingItemAdapter extends ArrayAdapter<ShoppingItem> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // This method will return
         LayoutInflater inflater = LayoutInflater.from(myContext);
-        Log.e("sasa", "pppppppppppppppppppppppppppppppppppppppppppppppppppp");
         View view = inflater.inflate(R.layout.list_item, null); // List it the way task is listed
         TextView itemName = view.findViewById(R.id.shoppingItemTextView);
-//        TextView taskDueDate = view.findViewById(R.id.taskDueDate);
-//        ImageView imageView = view.findViewById(R.id.imageView);
-        System.out.println("SKROOOOOOOOOOOOOOOOOOOOOOOOOOO");
         final LinearLayout taskRowView = view.findViewById(R.id.itemRowView);
-//        System.out.println("Position is => " + Integer.toString(position));
-//        System.out.println("The list has => " + Integer.toString(taskList.size()) + " items");
         ShoppingItem item = itemList.get(position);
         itemName.setText(item.getName());
 //        taskDueDate.setText("Due date: " + item.getDueDate());
