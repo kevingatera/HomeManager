@@ -65,7 +65,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         if (view == inviteToRegister){
             // Open the registration page
 //            setContentView(R.layout.activity_login);
-            finish();
             startActivity(new Intent(this, RegistrationActivity.class));
         }
     }

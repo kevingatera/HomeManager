@@ -1,12 +1,16 @@
 package besmart.team.homemanager;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -87,5 +91,23 @@ public class fragment_main_family extends Fragment{
 
         });
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        System.out.println(getActivity() == null);
+
+        if (this.isVisible()) {
+                getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.GONE);
+        }
+
+        if (!isVisibleToUser && isAdded())  {
+            /* isAdded is to check whether the fragment is present before calling getActivity()
+            See: https://stackoverflow.com/questions/11631408/android-fragment-getactivity-sometimes-returns-null  */
+                getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.VISIBLE);
+        }
+    }
+
 }
 

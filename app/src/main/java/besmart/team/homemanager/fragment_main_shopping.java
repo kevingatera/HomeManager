@@ -115,15 +115,14 @@ public class fragment_main_shopping extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (this.isVisible()) {
-            Activity tempActivity = getActivity();
-            tempActivity.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            getActivity().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(getActivity(), ShoppingActivity.class));
                 }
             });
 
-            TextView fabTextView = tempActivity.findViewById(R.id.fabTextView);
+            TextView fabTextView = getActivity().findViewById(R.id.fabTextView);
             fabTextView.setText("Add an article");
 
             // If we are becoming invisible, then...

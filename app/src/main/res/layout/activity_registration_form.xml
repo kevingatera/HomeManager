@@ -27,6 +27,60 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingBottom="0dp"
+            android:paddingTop="15sp">
+
+            <!--set background color black-->
+            <TextView
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Email"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="238dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingBottom="0dp"
+            android:paddingTop="15sp">
+
+            <!--set background color black-->
+            <TextView
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Password"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="238dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="80dp"
             android:orientation="horizontal"
             android:paddingBottom="10sp"
@@ -37,7 +91,7 @@
                 android:layout_height="55dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Choose member type"
+                android:text="Choose type"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textSize="18sp" />
 
@@ -71,18 +125,45 @@
             android:paddingBottom="10sp"
             android:paddingTop="15sp">
 
-            <!--set background color black-->
             <TextView
                 android:layout_width="138dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Enter member name"
+                android:text="Name"
                 android:textAlignment="viewStart"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/itemName"
+                android:id="@+id/name"
+                android:layout_width="238dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingBottom="0dp"
+            android:paddingTop="15sp">
+
+            <!--set background color black-->
+
+            <TextView
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Gender"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/gender"
                 android:layout_width="238dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

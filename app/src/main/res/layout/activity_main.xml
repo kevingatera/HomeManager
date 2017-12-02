@@ -42,6 +42,7 @@
 
 
     <LinearLayout
+        android:id="@+id/fabAddLayout"
         android:layout_width="250sp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

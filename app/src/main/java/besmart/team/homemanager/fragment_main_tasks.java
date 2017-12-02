@@ -1,15 +1,19 @@
 package besmart.team.homemanager;
 
 
+import android.app.FragmentContainer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -107,9 +111,14 @@ public class fragment_main_tasks extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
+        System.out.println(getActivity() == null);
+
+        FloatingActionButton myFab = this.getActivity().findViewById(R.id.fab);
+
         // Make sure that we are currently visible
         if (this.isVisible()) {
-            Log.e("MyFragment", "\n\n\n\n IS visible anymore. \n  STARTING audio. \n \n");
+            TextView myFabText = getActivity().findViewById(R.id.fabTextView);
+            myFabText.setText("Add a task");
             getActivity().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
