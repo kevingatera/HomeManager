@@ -111,14 +111,9 @@ public class fragment_main_tasks extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        System.out.println(getActivity() == null);
-
-        FloatingActionButton myFab = this.getActivity().findViewById(R.id.fab);
-
         // Make sure that we are currently visible
         if (this.isVisible()) {
-            TextView myFabText = getActivity().findViewById(R.id.fabTextView);
-            myFabText.setText("Add a task");
+            ((TextView) getActivity().findViewById(R.id.fabTextView)).setText("Add a task");
             getActivity().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

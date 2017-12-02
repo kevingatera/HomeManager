@@ -126,7 +126,7 @@ public class fragment_main_shopping extends Fragment {
             fabTextView.setText("Add an article");
 
             // If we are becoming invisible, then...
-            if (!isVisibleToUser) {
+            if (!isVisibleToUser && isAdded()) {
 //                Log.e("MyFragment", "\n\n\n\n Not visible anymore.  Stopping audio. \n \n");
 
             }
