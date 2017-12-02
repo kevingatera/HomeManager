@@ -7,7 +7,15 @@ public class Parent extends User {
 		super();
 		this.name = null;
 	}
-	  public void addTask(Task task1) {
+
+    public Parent(String id, String name, String email, String gender) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.gender = gender;
+    }
+
+    public void addTask(Task task1) {
 		  taskQueue.add(task1);
 	}
 
