@@ -1,5 +1,4 @@
 package besmart.team.homemanager;
-import besmart.team.homemanager.logic.Task;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,8 +17,9 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.Serializable;
 import java.util.List;
+
+import besmart.team.homemanager.logic.Task;
 
 /**
  * Created by kevingatera on 23/11/17.
@@ -108,6 +108,10 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                         Task toBeModified = taskList.get(position);
                         Intent i = new Intent(getContext(), TaskActivity.class);
                         i.putExtra("Title", toBeModified.getTitle());
+                        i.putExtra("Description", toBeModified.getDescription());
+                        i.putExtra("Due Date", toBeModified.getDueDate());
+                        i.putExtra("Score", toBeModified.getScore());
+                        i.putExtra("ID", toBeModified.getId());
                         getContext().startActivity(i);
                     }
                 });

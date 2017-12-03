@@ -1,22 +1,19 @@
 package besmart.team.homemanager;
 
-import besmart.team.homemanager.logic.Task;
-
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Random;
+
+import besmart.team.homemanager.logic.Task;
 
 public class TaskActivity extends AppCompatActivity {
 
@@ -26,24 +23,13 @@ public class TaskActivity extends AppCompatActivity {
     private EditText taskDueDate;
     private Button taskSubmit;
     private DatabaseReference databaseTask;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
         setTitle("Create new task");
-
-        Bundle extras = getIntent().getExtras();
-        if (extras == null) {
-            System.out.println("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-            return;
-        }
-        // get data via the key
-        String value1 = extras.getString("Title");
-        if (value1 != null) {
-            // do something with the data
-            System.out.println("GOT THEM! YEEEEEEEEEEEEES" + value1);
-        }
 
         databaseTask = FirebaseDatabase.getInstance().getReference("/task");
 
@@ -56,12 +42,43 @@ public class TaskActivity extends AppCompatActivity {
         taskSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addTask();
+                addOrModifyTask("add");
             }
         });
+
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            return;
+        }
+        // get data via the key
+        String title = extras.getString("Title");
+        String description = extras.getString("Description");
+        String score = extras.getString("Score");
+        String dueDate = extras.getString("Due Date");
+        id = extras.getString("ID");
+
+        if (title != null &&
+                description != null &&
+                score != null & dueDate != null) {
+            // do something with the data
+            setTitle("Modify Task");
+            taskSubmit.setText("MODIFY");
+            taskName.setText(title);
+            taskDescription.setText(description);
+            taskScore.setText(score);
+            taskDueDate.setText(dueDate);
+
+            taskSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addOrModifyTask("modify");
+                }
+            });
+
+        }
     }
 
-    private void addTask() {
+    private void addOrModifyTask(String choice) {
         String title = taskName.getText().toString();
         String description = taskDescription.getText().toString();
         String score = taskScore.getText().toString();
@@ -73,11 +90,14 @@ public class TaskActivity extends AppCompatActivity {
                 !TextUtils.isEmpty(dueDate)) {
 
             // Generate an id
-            Random r = new Random();
-            String id = "task" + Integer.toString(r.nextInt(999999-100000) + 100000);
+            if (choice.equals("add")){
+                Random r = new Random();
+                id = "task" + Integer.toString(r.nextInt(999999-100000) + 100000);
+            }
 
             Task task;
             task = new Task(id, title, description, score, dueDate);
+
 
             databaseTask.child(id).setValue(task);
 
@@ -89,6 +109,10 @@ public class TaskActivity extends AppCompatActivity {
         else {
             Toast.makeText(this, "One or more fields missing", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void modifyTask() {
+        System.out.println("MODIFFFFIEEEEEEEEED!!!!!");
     }
 
 }
