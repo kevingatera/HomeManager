@@ -40,8 +40,8 @@
 
             <TextView
                 android:id="@+id/textView11"
-                android:layout_width="141dp"
-                android:layout_height="50dp"
+                android:layout_width="187dp"
+                android:layout_height="54dp"
                 android:layout_weight="1"
                 android:text="kevin"
                 android:textAppearance="@style/TextAppearance.AppCompat"
@@ -64,7 +64,7 @@
 
             <TextView
                 android:id="@+id/textView12"
-                android:layout_width="147dp"
+                android:layout_width="193dp"
                 android:layout_height="51dp"
                 android:layout_weight="1"
                 android:text="8725061"
@@ -88,7 +88,7 @@
 
             <TextView
                 android:id="@+id/text"
-                android:layout_width="223dp"
+                android:layout_width="267dp"
                 android:layout_height="55dp"
                 android:layout_weight="1"
                 android:text="Rancy"
