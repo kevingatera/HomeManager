@@ -1,11 +1,10 @@
 package besmart.team.homemanager;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -110,7 +109,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             Child c = new Child(id, name, email, gender);
             databaseReference.child("children").child(id).setValue(c);
         } else if (type.equals("Parent")) {
-            databaseReference = db.getReference("/users/parent");
             id = "parent" + Integer.toString(r.nextInt(999999-100000) + 10000);
             Parent p = new Parent(id, name, email, gender);
             databaseReference.child("parent").child(id).setValue(p);
