@@ -18,9 +18,8 @@
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="53dp"
             android:paddingBottom="20sp"
-            android:paddingTop="20sp"
             android:text="Enter the details: "
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="30sp" />
