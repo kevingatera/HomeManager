@@ -13,7 +13,6 @@ import java.util.LinkedList;
  */
 public class User {
 
-	protected boolean isAuthenticad;
 	protected String id;
 	protected String name;
 	protected String email;
@@ -25,7 +24,6 @@ public class User {
 
 	//first constructor
 	public User() {
-		isAuthenticad=false;
 		name=null;
 		gender=null;
 		age="0";
@@ -33,21 +31,8 @@ public class User {
 		totalScore = "0";
 		taskQueue = new LinkedList<Task>();
 	}
-		//second constructor which take parameters 
-	public User(boolean isAuthenticad1,String name1,String gender1,String age1,String avatarLocation1, Queue<Task> taskQueue1, String totalScore1) {
-		isAuthenticad=isAuthenticad1;
-		name=name1;
-		gender=gender1;
-		age=age1;
-		avatarLocation=avatarLocation1;
-		//totalScore = totalScore1;
-		//taskQueue =taskQueue1;
-	}
 	
 		//setters
-		public void setIsAuthenticad(boolean isAuthenticad1) {
-			isAuthenticad=isAuthenticad1;
-		 }
 		public void setName(String name1) {
 			 name=name1;
 		 }
@@ -67,9 +52,6 @@ public class User {
 			 taskQueue = taskQueue1;
 		 }
 		 //getters
-		public boolean getIsAuthenticad() {
-			 return isAuthenticad;
-		 }
 		public String getName() {
 			 return name;
 		 }

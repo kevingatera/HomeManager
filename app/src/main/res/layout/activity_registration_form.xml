@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="besmart.team.homemanager.logic.registration_form">
+    tools:context="besmart.team.homemanager.registration_form">
 
     <LinearLayout
         android:layout_width="match_parent"

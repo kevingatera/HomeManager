@@ -1,5 +1,6 @@
 package besmart.team.homemanager.logic;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -13,7 +14,7 @@ import java.util.Queue;
  *
  */
 
-public class Task {
+public class Task implements Serializable {
 	private String id;
 	private String title;
 	private String creationDate;

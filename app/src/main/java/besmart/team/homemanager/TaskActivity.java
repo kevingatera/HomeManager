@@ -2,6 +2,7 @@ package besmart.team.homemanager;
 
 import besmart.team.homemanager.logic.Task;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,6 +32,18 @@ public class TaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
         setTitle("Create new task");
+
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            System.out.println("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+            return;
+        }
+        // get data via the key
+        String value1 = extras.getString("Title");
+        if (value1 != null) {
+            // do something with the data
+            System.out.println("GOT THEM! YEEEEEEEEEEEEES" + value1);
+        }
 
         databaseTask = FirebaseDatabase.getInstance().getReference("/task");
 

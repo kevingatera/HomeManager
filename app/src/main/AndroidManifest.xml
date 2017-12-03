@@ -27,9 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShoppingActivity" />
-        <activity android:name=".logic.registration_form" />
+        <activity android:name=".registration_form" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".logic.family_member_notes"></activity>
+        <activity android:name=".family_member_notes"></activity>
     </application>
 
 </manifest>
