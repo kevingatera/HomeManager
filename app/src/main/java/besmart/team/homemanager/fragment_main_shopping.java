@@ -42,7 +42,6 @@ public class fragment_main_shopping extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView2 = inflater.inflate(R.layout.fragment_main_shopping, container, false);
 
-        System.out.println(this.getTag() + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         return rootView2;
     }
 
@@ -65,6 +64,35 @@ public class fragment_main_shopping extends Fragment {
         populate(myRef);
 
 }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (this.isVisible()) {
+            getActivity().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivityForResult(new Intent(getActivity(), ShoppingActivity.class), 1);
+                }
+            });
+
+            TextView fabTextView = getActivity().findViewById(R.id.fabTextView);
+            fabTextView.setText("Add an article");
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == 1 && requestCode == 1) {
+            reloadShoppingView();
+        }
+    }
+
+    public void reloadShoppingView(){
+        myGroceryArrayList.clear();
+        myMaterialArrayList.clear();
+        populate(myRef);
+    }
 
     private void populate(DatabaseReference myRef) {
         myRef.addChildEventListener(new ChildEventListener() {
@@ -106,42 +134,6 @@ public class fragment_main_shopping extends Fragment {
 
             }
         });
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (this.isVisible()) {
-            getActivity().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivityForResult(new Intent(getActivity(), ShoppingActivity.class), 1);
-                }
-            });
-
-            TextView fabTextView = getActivity().findViewById(R.id.fabTextView);
-            fabTextView.setText("Add an article");
-
-            // If we are becoming invisible, then...
-            if (!isVisibleToUser && isAdded()) {
-//                Log.e("MyFragment", "\n\n\n\n Not visible anymore.  Stopping audio. \n \n");
-
-            }
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println("GOOOOOOOOD");
-        if(resultCode == 1 && requestCode == 1) {
-            reloadShoppingView();
-        }
-    }
-
-    public void reloadShoppingView(){
-        myGroceryArrayList.clear();
-        myMaterialArrayList.clear();
-        populate(myRef);
     }
 }
 

@@ -3,12 +3,10 @@ package besmart.team.homemanager;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 import besmart.team.homemanager.logic.ShoppingItem;
-import besmart.team.homemanager.logic.Task;
 
 /**
  * Created by kevingatera on 30/11/17.
@@ -30,7 +27,7 @@ public class ShoppingItemAdapter extends ArrayAdapter<ShoppingItem> {
     int resource;
     List<ShoppingItem> itemList;
 
-    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("/Shopping");
+    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("/shopping_items");
 
 
     public ShoppingItemAdapter(Context myContext, int resource, List<ShoppingItem> itemList){
@@ -48,32 +45,35 @@ public class ShoppingItemAdapter extends ArrayAdapter<ShoppingItem> {
         // This method will return
         LayoutInflater inflater = LayoutInflater.from(myContext);
         View view = inflater.inflate(R.layout.list_item, null); // List it the way task is listed
-        TextView itemName = view.findViewById(R.id.shoppingItemTextView);
+        TextView itemName = view.findViewById(R.id.shoppingItemTitle);
+        TextView itemQuantity = view.findViewById(R.id.shoppingItemQty);
         final LinearLayout taskRowView = view.findViewById(R.id.itemRowView);
         ShoppingItem item = itemList.get(position);
+
         itemName.setText(item.getName());
+        itemQuantity.setText(itemQuantity.getText() + item.getQuantity());
+
+
 //        taskDueDate.setText("Due date: " + item.getDueDate());
 //        imageView.setImageDrawable(myContext.getResources().getDrawable(R.drawable.ic_launcher_background));
 
-//        view.findViewById(R.id.buttonTaskDone).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                /* Called when the user clicks on a list item */
-//                ShoppingItem toBeRemoved = itemList.get(position);
-//                System.out.println(toBeRemoved.getId());
-//                myRef.child(toBeRemoved.getId()).removeValue();
-//                itemList.remove(toBeRemoved);
-//                notifyDataSetChanged();
-//            }
-//        });
-
-
-        view.findViewById(R.id.itemRowView).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.shoppingItemCheckbox).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                System.out.println("SKKKKKRIIIIIIi ===> " + Integer.toString(position));
+            public void onClick(View view) {
+                /* Called when the user clicks on a list item */
+                ShoppingItem toBeRemoved = itemList.get(position);
+
+                if(toBeRemoved.getType().equals("Groceries")) {
+                    myRef.child("groceries").child(toBeRemoved.getId()).removeValue();
+                } else if (toBeRemoved.getType().equals("Materials")) {
+                    myRef.child("materials").child(toBeRemoved.getId()).removeValue();
+                }
+
+                itemList.remove(toBeRemoved);
+                notifyDataSetChanged();
             }
         });
+
 
         return view;
     }

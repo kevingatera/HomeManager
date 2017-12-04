@@ -110,8 +110,4 @@ public class TaskActivity extends AppCompatActivity {
         }
     }
 
-    private void modifyTask() {
-        System.out.println("MODIFFFFIEEEEEEEEED!!!!!");
-    }
-
 }
