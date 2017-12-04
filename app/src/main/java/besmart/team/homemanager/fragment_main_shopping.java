@@ -40,9 +40,8 @@ public class fragment_main_shopping extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView2 = inflater.inflate(R.layout.fragment_main_shopping, container, false);
 
-        return rootView2;
+        return inflater.inflate(R.layout.fragment_main_shopping, container, false);
     }
 
     @Override
@@ -77,7 +76,8 @@ public class fragment_main_shopping extends Fragment {
             });
 
             TextView fabTextView = getActivity().findViewById(R.id.fabTextView);
-            fabTextView.setText("Add an article");
+//            fabTextView.setText("Add an article");
+            fabTextView.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -101,12 +101,16 @@ public class fragment_main_shopping extends Fragment {
                 for(DataSnapshot child : dataSnapshot.getChildren()) {
 
                     ShoppingItem item = child.getValue(ShoppingItem.class);
-                    if(item.getType().equals("Groceries")){
-                        myGroceryArrayList.add(item);
+
+                    if (item != null){
+                        if(item.getType().equals("Groceries")){
+                            myGroceryArrayList.add(item);
+                        }
+                        else if (item.getType().equals("Materials")) {
+                            myMaterialArrayList.add(item);
+                        }
                     }
-                    else if (item.getType().equals("Materials")) {
-                        myMaterialArrayList.add(item);
-                    }
+
                 }
                 m1.notifyDataSetChanged();
                 m2.notifyDataSetChanged();

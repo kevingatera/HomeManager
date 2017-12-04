@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,17 +53,17 @@ public class MainActivity extends AppCompatActivity {
             Log.e("USER IS", user.toString());
         }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
     }
@@ -134,15 +135,19 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     fragment_main_shopping tab1 = new fragment_main_shopping();
                     // Set the text on the fab button
-                    fabTextView = (TextView) findViewById(R.id.fabTextView);
-                    fabTextView.setText("Add an article");
+//                    fabTextView = (TextView) findViewById(R.id.fabTextView);
+//                    fabTextView.setText("Add an article");
+                    findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivityForResult(new Intent(getApplication(), ShoppingActivity.class), 1);
+                        }
+                    });
                     return tab1;
                 case 1:
-                    fragment_main_tasks tab2 = new fragment_main_tasks();
-                    return tab2;
+                    return new fragment_main_tasks();
                 case 2:
-                    fragment_main_family tab3 = new fragment_main_family();
-                    return tab3;
+                    return new fragment_main_family();
                 default:
                     return null;
             }
