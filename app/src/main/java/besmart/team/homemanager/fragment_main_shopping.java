@@ -110,7 +110,6 @@ public class fragment_main_shopping extends Fragment {
                             myMaterialArrayList.add(item);
                         }
                     }
-
                 }
                 m1.notifyDataSetChanged();
                 m2.notifyDataSetChanged();

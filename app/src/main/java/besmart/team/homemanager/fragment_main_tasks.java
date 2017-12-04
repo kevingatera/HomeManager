@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -29,10 +28,10 @@ public class fragment_main_tasks extends Fragment {
 
     /* adding the firebase */
 
-    ArrayList<String> myArrayList = new ArrayList<>();
-    ArrayList<Task> myTaskList;
-    ListView myListView;
-    // SwipeMenuListView myListView;
+    ArrayList<Task> myAssignedTaskList;
+    ListView myAssignedTaskListView;
+    TaskListAdapter myListAdapter;
+
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("/task");
@@ -51,21 +50,26 @@ public class fragment_main_tasks extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        myTaskList = new ArrayList<>();
+        myAssignedTaskList = new ArrayList<>();
 
 
-        final TaskListAdapter myListAdapter = new TaskListAdapter(getActivity(), R.layout.list_task, myTaskList);
+        myListAdapter = new TaskListAdapter(getActivity(), R.layout.list_task, myAssignedTaskList);
 
-        myListView = view.findViewById(R.id.list);
-        myListView.setAdapter(myListAdapter);
+        System.out.println(getActivity());
 
+        myAssignedTaskListView = view.findViewById(R.id.assignedTasksList);
+        myAssignedTaskListView.setAdapter(myListAdapter);
 
+        populate(myRef);
+    }
+
+    private void populate(DatabaseReference myRef) {
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Task task = dataSnapshot.getValue(Task.class);
-                task.setid(dataSnapshot.getKey());
-                myTaskList.add(task);
+                task.setId(dataSnapshot.getKey());
+                myAssignedTaskList.add(task);
                 myListAdapter.notifyDataSetChanged();
             }
 
@@ -89,10 +93,6 @@ public class fragment_main_tasks extends Fragment {
 
             }
         });
-
-        // Write a message to the database
-        // DatabaseReference myRef = database.getReference("test");
-        // myRef.setValue("Hello, World!");
     }
 
     @Override
@@ -101,17 +101,24 @@ public class fragment_main_tasks extends Fragment {
 
         // Make sure that we are currently visible
         if (this.isVisible()) {
-            ((TextView) getActivity().findViewById(R.id.fabTextView)).setText("Add a task");
             getActivity().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), TaskActivity.class));
+                    startActivityForResult(new Intent(getActivity(), TaskActivity.class), 22);
                 }
             });
-            // If we are becoming invisible, then...
-            if (!isVisibleToUser) {
-                //
-            }
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == 22 && requestCode == 22){
+            reloadView();
+        }
+    }
+
+    private void reloadView() {
+        myAssignedTaskList.clear();
+        populate(myRef);
     }
 }

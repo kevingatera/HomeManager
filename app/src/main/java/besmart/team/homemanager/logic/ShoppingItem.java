@@ -8,7 +8,6 @@ public class ShoppingItem {
      private String type;
 
      public ShoppingItem(){
-
      }
 
     public ShoppingItem(String id, String name, String quantity, String type){

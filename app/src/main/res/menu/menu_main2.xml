@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="besmart.team.homemanager.MainActivity">
 
-    <item
+    <!--<item
         android:id="@+id/checkable_menu"
         android:checkable="true"
-        android:title="@string/only_my_tasks" />
+        android:title="@string/only_my_tasks" />-->
 
     <item
         android:id="@+id/action_settings"

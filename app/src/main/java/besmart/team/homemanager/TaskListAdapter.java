@@ -1,5 +1,6 @@
 package besmart.team.homemanager;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -52,12 +51,9 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         View view = inflater.inflate(R.layout.list_task, null);
         TextView taskName = view.findViewById(R.id.taskTitle);
         TextView taskDueDate = view.findViewById(R.id.taskDueDate);
-        ImageView imageView = view.findViewById(R.id.imageView);
-        LinearLayout taskRowView = view.findViewById(R.id.taskRowView);
         Task t = taskList.get(position);
         taskName.setText(t.getTitle());
         taskDueDate.setText("Due date: " + t.getDueDate());
-        imageView.setImageDrawable(myContext.getResources().getDrawable(R.drawable.ic_launcher_background));
 
         view.findViewById(R.id.buttonTaskDone).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,13 +75,18 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                 TextView modalID = mView.findViewById(R.id.taskModalID);
                 TextView modalDueDate = mView.findViewById(R.id.taskModalDueDate);
                 TextView modalDescription = mView.findViewById(R.id.taskModalDescription);
+                TextView modalStatus = mView.findViewById(R.id.taskModalStatus);
+                TextView modalAssignee = mView.findViewById(R.id.taskModalAssignee);
+
                 Button deleteButton = mView.findViewById(R.id.taskModalDelete);
                 Button modifyButton = mView.findViewById(R.id.taskModalModifyButton);
 
                 modalID.setText(t.getId());
+                modalStatus.setText(modalStatus.getText() + t.getStatus().toUpperCase());
                 modalTitle.setText(t.getTitle());
                 modalDescription.setText(t.getDescription());
                 modalDueDate.setText(t.getDueDate());
+                modalAssignee.setText(t.getAssigneeName());
 
                 mBuilder.setView(mView);
                 final AlertDialog taskDetailsDialog = mBuilder.create();
@@ -97,6 +98,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                         myRef.child(toBeRemoved.getId()).removeValue();
                         taskList.remove(toBeRemoved);
                         notifyDataSetChanged();
+                        taskDetailsDialog.dismiss();
                     }
                 });
 
@@ -110,7 +112,8 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                         i.putExtra("Due Date", toBeModified.getDueDate());
                         i.putExtra("Score", toBeModified.getScore());
                         i.putExtra("ID", toBeModified.getId());
-                        getContext().startActivity(i);
+                        i.putExtra("AssigneeName", toBeModified.getAssigneeName());
+                        ((Activity) getContext()).startActivityForResult(i, 22);
                         taskDetailsDialog.dismiss();
                     }
                 });
@@ -121,5 +124,6 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
 
         return view;
     }
+
 }
 

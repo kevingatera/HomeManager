@@ -54,10 +54,11 @@ public class ShoppingItemAdapter extends ArrayAdapter<ShoppingItem> {
         itemQuantity.setText(itemQuantity.getText() + item.getQuantity());
 
 
+
 //        taskDueDate.setText("Due date: " + item.getDueDate());
 //        imageView.setImageDrawable(myContext.getResources().getDrawable(R.drawable.ic_launcher_background));
 
-        view.findViewById(R.id.shoppingItemCheckbox).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.shoppingItemDeleteButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /* Called when the user clicks on a list item */

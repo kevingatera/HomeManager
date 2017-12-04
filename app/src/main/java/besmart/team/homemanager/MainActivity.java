@@ -88,11 +88,15 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+
+        /*
         if(id ==  R.id.checkable_menu) {
             onlyMyTasks = !item.isChecked();
             item.setChecked(onlyMyTasks);
+            findViewById(R.id.unassignedTasksList).setVisibility(View.GONE);
+            findViewById(R.id.unassignedListViewTitle).setVisibility(View.GONE);
             return true;
-        }
+        } */
 
         if(id == R.id.logOutButton) {
             return true;
@@ -104,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
-        MenuItem checkable = menu.findItem(R.id.checkable_menu);
-        checkable.setChecked(onlyMyTasks);
+//        MenuItem checkable = menu.findItem(R.id.checkable_menu);
+//        checkable.setChecked(onlyMyTasks);
         return true;
     }
 
@@ -175,7 +179,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 }

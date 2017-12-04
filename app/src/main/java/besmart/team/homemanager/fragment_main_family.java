@@ -1,16 +1,12 @@
 package besmart.team.homemanager;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
-import android.text.Layout;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -61,9 +57,7 @@ public class fragment_main_family extends Fragment{
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 for(DataSnapshot familySnapshot : dataSnapshot.getChildren()){
-//                    System.out.println("Booyah");
                     User user = familySnapshot.getValue(User.class);
-//                    System.out.println("name is " + user.getName());
                     userList.add(user);
                 }
 
@@ -95,8 +89,6 @@ public class fragment_main_family extends Fragment{
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-
-        System.out.println(getActivity() == null);
 
         if (this.isVisible()) {
                 getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.GONE);

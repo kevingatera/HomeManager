@@ -39,11 +39,13 @@
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold" />
 
-                <CheckBox
-                    android:id="@+id/shoppingItemCheckbox"
-                    android:layout_width="130dp"
+                <ImageButton
+                    android:id="@+id/shoppingItemDeleteButton"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_delete"
+                    android:scaleType="centerCrop" />
 
             </LinearLayout>
         </LinearLayout>
