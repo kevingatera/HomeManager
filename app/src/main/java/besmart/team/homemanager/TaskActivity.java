@@ -96,8 +96,7 @@ public class TaskActivity extends AppCompatActivity {
             }
 
             Task task;
-            task = new Task(id, title, description, score, dueDate);
-
+            task = new Task(id, title, description, dueDate, score);
 
             databaseTask.child(id).setValue(task);
 

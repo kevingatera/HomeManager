@@ -71,10 +71,8 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         view.findViewById(R.id.taskRowView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("SKKKKKRIIIIIIi ===> " + Integer.toString(position));
-                // Titile, Id, Score, Descriptio, duedate
                 Task t = taskList.get(position);
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
                 View mView = LayoutInflater.from(getContext()).inflate(R.layout.details, null);
 
                 TextView modalTitle = mView.findViewById(R.id.taskModalTitle);
@@ -90,7 +88,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                 modalDueDate.setText(t.getDueDate());
 
                 mBuilder.setView(mView);
-                AlertDialog taskDetailsDialog = mBuilder.create();
+                final AlertDialog taskDetailsDialog = mBuilder.create();
 
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -113,6 +111,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                         i.putExtra("Score", toBeModified.getScore());
                         i.putExtra("ID", toBeModified.getId());
                         getContext().startActivity(i);
+                        taskDetailsDialog.dismiss();
                     }
                 });
 

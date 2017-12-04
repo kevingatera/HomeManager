@@ -42,7 +42,7 @@ public class Task implements Serializable {
 	//second constructor which take parameters 
 
 
-    public Task( String creationDate, String description, String dueDate, String score,  String note, String title) {
+    public Task( String creationDate, String description, String dueDate, String score,  String status, String title) {
         this.title = title;
         this.creationDate = creationDate;
         this.dueDate = dueDate;

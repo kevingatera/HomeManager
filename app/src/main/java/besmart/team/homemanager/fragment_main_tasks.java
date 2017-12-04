@@ -1,14 +1,10 @@
 package besmart.team.homemanager;
 
 
-import android.app.FragmentContainer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,18 +63,10 @@ public class fragment_main_tasks extends Fragment {
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-//                for(DataSnapshot taskSnapshot : dataSnapshot.getChildren()){
-                    Task task = dataSnapshot.getValue(Task.class);
-                    task.setid(dataSnapshot.getKey());
-//                    System.out.println(task);
-                    myTaskList.add(task);
-//                }
-
-                // String myChildValues = dataSnapshot.getValue(String.class);
-                // System.out.println(myChildValues);
-                // myArrayList.add(myChildValues);
-                 myListAdapter.notifyDataSetChanged();
+                Task task = dataSnapshot.getValue(Task.class);
+                task.setid(dataSnapshot.getKey());
+                myTaskList.add(task);
+                myListAdapter.notifyDataSetChanged();
             }
 
             @Override

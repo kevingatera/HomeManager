@@ -1,15 +1,13 @@
 package besmart.team.homemanager;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -82,5 +80,13 @@ public class ShoppingActivity extends AppCompatActivity implements View.OnClickL
         else {
             Toast.makeText(this, "One or more fields missing", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void finish(){
+
+        setResult(1);
+
+        super.finish();
     }
 }
