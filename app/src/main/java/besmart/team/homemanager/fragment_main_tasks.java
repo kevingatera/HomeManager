@@ -32,6 +32,9 @@ public class fragment_main_tasks extends Fragment {
     ListView myAssignedTaskListView;
     TaskListAdapter myListAdapter;
 
+    ArrayList<Task> myUnassignedTaskList;
+    ListView myUnassignedTaskListView;
+    TaskListAdapter myUnassignedListAdapter;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("/task");
@@ -51,14 +54,18 @@ public class fragment_main_tasks extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         myAssignedTaskList = new ArrayList<>();
+        myUnassignedTaskList = new ArrayList<>();
 
 
         myListAdapter = new TaskListAdapter(getActivity(), R.layout.list_task, myAssignedTaskList);
+        myUnassignedListAdapter = new TaskListAdapter(getActivity(), R.layout.list_task, myUnassignedTaskList);
 
-        System.out.println(getActivity());
 
         myAssignedTaskListView = view.findViewById(R.id.assignedTasksList);
         myAssignedTaskListView.setAdapter(myListAdapter);
+
+        myUnassignedTaskListView = view.findViewById(R.id.unassignedTasksList);
+        myUnassignedTaskListView.setAdapter(myUnassignedListAdapter);
 
         populate(myRef);
     }
@@ -69,26 +76,39 @@ public class fragment_main_tasks extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Task task = dataSnapshot.getValue(Task.class);
                 task.setId(dataSnapshot.getKey());
-//                if(task.getStatus().equals("incomplete") && task.getAssigneeName().equals()){
-//
-//                }
-                myAssignedTaskList.add(task);
+                if(task.getStatus().equals("complete") || task.getAssigneeName().equals("NONE")){
+                    if(myAssignedTaskList.indexOf(task) != -1) {
+                        myAssignedTaskList.remove(myAssignedTaskList.indexOf(task));
+                    }
+                    myUnassignedTaskList.add(task);
+                }
+
+                else {
+                    if(myUnassignedTaskList.indexOf(task) != -1) {
+                        myUnassignedTaskList.remove(myAssignedTaskList.indexOf(task));
+                    }
+                    myAssignedTaskList.add(task);
+                }
                 myListAdapter.notifyDataSetChanged();
+                myUnassignedListAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 myListAdapter.notifyDataSetChanged();
+                myUnassignedListAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 myListAdapter.notifyDataSetChanged();
+                myUnassignedListAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
                 myListAdapter.notifyDataSetChanged();
+                myUnassignedListAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -122,6 +142,7 @@ public class fragment_main_tasks extends Fragment {
 
     private void reloadView() {
         myAssignedTaskList.clear();
+        myUnassignedTaskList.clear();
         populate(myRef);
     }
 }

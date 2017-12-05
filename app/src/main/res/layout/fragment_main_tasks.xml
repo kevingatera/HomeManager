@@ -40,7 +40,7 @@
                 android:layout_height="50sp"
                 android:layout_weight="1"
                 android:paddingTop="10sp"
-                android:text="Unassigned Tasks"
+                android:text="Unassigned &amp; Complete Tasks"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textSize="18sp"
                 android:textStyle="bold" />

@@ -69,16 +69,13 @@ public class fragment_main_family extends Fragment{
         super.setUserVisibleHint(isVisibleToUser);
 
         if (this.isVisible()) {
-//                progressDialog.show();
-                getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.GONE);
-//                populateListView();
-            populateListView();
+            getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.GONE);
         }
 
         if (!isVisibleToUser && isAdded())  {
             /* isAdded is to check whether the fragment is present before calling getActivity()
             See: https://stackoverflow.com/questions/11631408/android-fragment-getactivity-sometimes-returns-null  */
-                getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.VISIBLE);
+            getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.VISIBLE);
         }
     }
 

@@ -1,7 +1,7 @@
 package besmart.team.homemanager;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import besmart.team.homemanager.logic.Child;
 import besmart.team.homemanager.logic.User;
 
 /**
@@ -40,6 +39,8 @@ public class UserListAdapter extends ArrayAdapter<User> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // This method will return
+        ((Activity) getContext()).findViewById(R.id.fabAddLayout).setVisibility(View.GONE);
+
         LayoutInflater inflater = LayoutInflater.from(myContext);
         View view = inflater.inflate(R.layout.list_people, null);
         TextView userNameLabel = view.findViewById(R.id.userNameLabel);
@@ -52,6 +53,9 @@ public class UserListAdapter extends ArrayAdapter<User> {
         userScoreLabel.setText("Score : " + user.gettotalScore());
         imageFamilyMember.setImageDrawable(myContext.getResources().getDrawable(R.drawable.ic_launcher_background));
 
+        notifyDataSetChanged();
+
+
 //        view.findViewById(R.id.buttonTaskDone).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -60,6 +64,7 @@ public class UserListAdapter extends ArrayAdapter<User> {
 //                myContext.startActivity(intent);
 //            }
 //        });
+
         return view;
     }
 }
