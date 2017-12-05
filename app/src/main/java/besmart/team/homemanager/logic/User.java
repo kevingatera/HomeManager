@@ -1,7 +1,7 @@
 package besmart.team.homemanager.logic;
 
-import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Queue;
 /*** 
  * This is class implements a task 
  * author:
@@ -61,6 +61,7 @@ public class User {
 		public String getAvatarLocation() {
 			 return avatarLocation;
 		 }
+		 public String getEmail() { return email; }
 		public String gettotalScore() {
 			 return totalScore;
 		 }

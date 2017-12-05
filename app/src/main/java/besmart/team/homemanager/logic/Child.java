@@ -12,4 +12,8 @@ public class Child extends  User {
         this.email = email;
         this.gender = gender;
     }
+
+    public void  incScore(String inc) {
+        this.totalScore = Integer.toString(Integer.parseInt(inc) + Integer.parseInt(totalScore));
+    }
 }

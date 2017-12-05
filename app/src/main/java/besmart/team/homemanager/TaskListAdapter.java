@@ -6,19 +6,29 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+import besmart.team.homemanager.logic.Child;
 import besmart.team.homemanager.logic.Task;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by kevingatera on 23/11/17.
@@ -30,8 +40,9 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
     int resource;
     List<Task> taskList;
 
+    private String userEmail;
 
-    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("/task");
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     public TaskListAdapter(Context myContext, int resource, List<Task> taskList){
@@ -41,7 +52,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         this.taskList = taskList;
     }
 
-
+    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("/users/children");
 
     @NonNull
     @Override
@@ -58,8 +69,41 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         view.findViewById(R.id.buttonTaskDone).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /* Called when the user clicks on a list item */
+                /* Called when the user clicks on a list item's done button */
 
+                Task task = taskList.get(position);
+
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    Task task = taskList.get(position);
+                    Child x;
+                    String xKey;
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot child : dataSnapshot.getChildren()) {
+                            boolean flag = false;
+                            Child c = child.getValue(Child.class);
+//                            System.out.println(c.getEmail());
+
+                            if(c.getEmail() == null) {
+                                break;
+                            }
+
+                            if (c.getEmail().equals(user.getEmail())) {
+                                c.incScore(task.getScore());
+                                userRef.child(child.getKey()).setValue(c);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Failed to read value
+                        Log.w(TAG, "Failed to read value.", databaseError.toException());
+                    }
+                });
+
+                notifyDataSetChanged();
+                Toast.makeText(getContext(), "CONGRATULATIONS! You've earned " + task.getScore() + " points.", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -95,7 +139,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                     @Override
                     public void onClick(View v) {
                         Task toBeRemoved = taskList.get(position);
-                        myRef.child(toBeRemoved.getId()).removeValue();
+                        (FirebaseDatabase.getInstance().getReference("/task")).child(toBeRemoved.getId()).removeValue();
                         taskList.remove(toBeRemoved);
                         notifyDataSetChanged();
                         taskDetailsDialog.dismiss();

@@ -88,6 +88,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                         if (task.isSuccessful()){
 
                             FirebaseUser user = auth.getCurrentUser();
+//                            System.out.println("NAME IS ===========================> " + user.getDisplayName());
                         }
 
                         else {

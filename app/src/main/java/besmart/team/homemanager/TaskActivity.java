@@ -36,6 +36,7 @@ public class TaskActivity extends AppCompatActivity {
     private DatabaseReference databaseTask;
     private DatabaseReference databaseUsers;
     private String id;
+    private String assignee;
 
 
     @Override
@@ -43,19 +44,6 @@ public class TaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
         setTitle("Create new task");
-
-        Bundle extras = getIntent().getExtras();
-        if (extras == null) {
-            return;
-        }
-        // get data via the key
-        String title = extras.getString("Title");
-        String description = extras.getString("Description");
-        String score = extras.getString("Score");
-        String dueDate = extras.getString("Due Date");
-        final String assignee = extras.getString("AssigneeName");
-
-        id = extras.getString("ID");
 
         databaseUsers = FirebaseDatabase.getInstance().getReference().child("/users/children");
 
@@ -92,8 +80,11 @@ public class TaskActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 assigneeNameList.add(user.getName());
                 assigneeAdapter.notifyDataSetChanged();
-                if(user.getName().equals(assignee)){
-                    assigneeChoices.setSelection(assigneeNameList.indexOf(assignee));
+
+                if(assignee != null) {
+                    if(user.getName().equals(assignee)){
+                        assigneeChoices.setSelection(assigneeNameList.indexOf(assignee));
+                    }
                 }
             }
 
@@ -118,6 +109,21 @@ public class TaskActivity extends AppCompatActivity {
             }
         });
 
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            return;
+        }
+        // get data via the key
+        String title = extras.getString("Title");
+        String description = extras.getString("Description");
+        String score = extras.getString("Score");
+        String dueDate = extras.getString("Due Date");
+        final String assignee = extras.getString("AssigneeName");
+
+        System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+        id = extras.getString("ID");
+
+        System.out.println("8888888888888888888888888");
 
         if (title != null &&
                 description != null &&
@@ -159,6 +165,7 @@ public class TaskActivity extends AppCompatActivity {
             // Generate an id
             if (choice.equals("add")){
                 Random r = new Random();
+                System.out.println("BOOOOOOOOOOOOOOOOO");
                 id = "task" + Integer.toString(r.nextInt(999999-100000) + 100000);
             }
 

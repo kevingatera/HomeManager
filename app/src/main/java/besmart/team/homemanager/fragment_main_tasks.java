@@ -69,6 +69,9 @@ public class fragment_main_tasks extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Task task = dataSnapshot.getValue(Task.class);
                 task.setId(dataSnapshot.getKey());
+//                if(task.getStatus().equals("incomplete") && task.getAssigneeName().equals()){
+//
+//                }
                 myAssignedTaskList.add(task);
                 myListAdapter.notifyDataSetChanged();
             }

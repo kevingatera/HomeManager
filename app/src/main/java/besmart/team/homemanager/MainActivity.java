@@ -138,9 +138,6 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     fragment_main_shopping tab1 = new fragment_main_shopping();
-                    // Set the text on the fab button
-//                    fabTextView = (TextView) findViewById(R.id.fabTextView);
-//                    fabTextView.setText("Add an article");
                     findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

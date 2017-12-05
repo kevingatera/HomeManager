@@ -157,7 +157,7 @@
                 android:layout_width="156dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Assignee"
+                android:text="Assignee:"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textSize="18sp"
                 android:textStyle="italic" />
