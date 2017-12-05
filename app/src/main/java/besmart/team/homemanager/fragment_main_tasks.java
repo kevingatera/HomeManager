@@ -24,7 +24,7 @@ import besmart.team.homemanager.logic.Task;
  * Created by kevingatera on 22/11/17.
  */
 
-public class fragment_main_tasks extends Fragment {
+public class fragment_main_tasks extends Fragment{
 
     /* adding the firebase */
 
@@ -43,7 +43,6 @@ public class fragment_main_tasks extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView2 = inflater.inflate(R.layout.fragment_main_tasks, container, false);
-
         return rootView2;
     }
 
@@ -130,6 +129,7 @@ public class fragment_main_tasks extends Fragment {
                     startActivityForResult(new Intent(getActivity(), TaskActivity.class), 22);
                 }
             });
+            getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.VISIBLE);
         }
     }
 
@@ -137,6 +137,10 @@ public class fragment_main_tasks extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == 22 && requestCode == 22){
             reloadView();
+        }
+
+        if(resultCode == 3335 && requestCode == 3335) {
+            System.out.println("YOUPIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIYAYAYAAYA");
         }
     }
 

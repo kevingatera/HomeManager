@@ -23,7 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import besmart.team.homemanager.logic.Child;
 import besmart.team.homemanager.logic.Task;
@@ -38,14 +38,12 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
 
     Context myContext;
     int resource;
-    List<Task> taskList;
-
-    private String userEmail;
+    ArrayList<Task> taskList;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-    public TaskListAdapter(Context myContext, int resource, List<Task> taskList){
+    public TaskListAdapter(Context myContext, int resource, ArrayList<Task> taskList){
         super(myContext, resource, taskList);
         this.myContext = myContext;
         this.resource = resource;
@@ -85,10 +83,18 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                             }
 
                             if (c.getEmail().equals(user.getEmail())) {
+                                FirebaseDatabase.getInstance().getReference("/task/").child(task.getId()).child("status").setValue("complete");
+                                taskList.remove(position);
+                                task.setStatus("completed");
+                                taskList.add(task);
+
+                                System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY " + FirebaseDatabase.getInstance().getReference("/task").child(task.getId()).getRef());
+                                // Increase the child score
                                 c.incScore(task.getScore());
                                 userRef.child(child.getKey()).setValue(c);
                             }
                         }
+                        notifyDataSetChanged();
                     }
 
                     @Override
@@ -102,6 +108,8 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                 Toast.makeText(getContext(), "CONGRATULATIONS! You've earned " + task.getScore() + " points.", Toast.LENGTH_LONG).show();
             }
         });
+
+        this.notifyDataSetChanged();
 
 
         view.findViewById(R.id.taskRowView).setOnClickListener(new View.OnClickListener() {

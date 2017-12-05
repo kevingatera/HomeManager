@@ -1,6 +1,5 @@
 package besmart.team.homemanager;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,15 +38,13 @@ public class UserListAdapter extends ArrayAdapter<User> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // This method will return
-        ((Activity) getContext()).findViewById(R.id.fabAddLayout).setVisibility(View.GONE);
 
         LayoutInflater inflater = LayoutInflater.from(myContext);
         View view = inflater.inflate(R.layout.list_people, null);
         TextView userNameLabel = view.findViewById(R.id.userNameLabel);
         TextView userScoreLabel = view.findViewById(R.id.userScoreLabel);
         ImageView imageFamilyMember = view.findViewById(R.id.imageFamilyMember);
-//        System.out.println("Position is => " + Integer.toString(position));
-//        System.out.println("The list has => " + Integer.toString(userList.size()) + " items");
+        
         User user = userList.get(position);
         userNameLabel.setText(user.getName());
         userScoreLabel.setText("Score : " + user.gettotalScore());
