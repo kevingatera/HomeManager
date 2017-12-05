@@ -75,14 +75,10 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
 
                 userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     Task task = taskList.get(position);
-                    Child x;
-                    String xKey;
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for(DataSnapshot child : dataSnapshot.getChildren()) {
-                            boolean flag = false;
                             Child c = child.getValue(Child.class);
-//                            System.out.println(c.getEmail());
 
                             if(c.getEmail() == null) {
                                 break;
