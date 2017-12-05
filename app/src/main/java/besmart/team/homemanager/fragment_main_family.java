@@ -1,5 +1,6 @@
 package besmart.team.homemanager;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,21 +25,26 @@ import besmart.team.homemanager.logic.User;
 
 public class fragment_main_family extends Fragment{
 
+    ProgressDialog progressDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView3 = inflater.inflate(R.layout.fragment_main_family, container, false);
+        progressDialog = new ProgressDialog(getActivity());
         return rootView3;
     }
 
     /* adding the firebase */
 
-    ArrayList<User> userList;
-    ListView myListView;
+    private ArrayList<User> userList;
+    private ListView myListView;
     // SwipeMenuListView myListView;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("/users");
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference myRef = database.getReference("/users");
+
+    private UserListAdapter myListAdapter;
 
     // retrieve data and populate upon startup of the app
     @Override
@@ -47,10 +53,38 @@ public class fragment_main_family extends Fragment{
 
         userList = new ArrayList<>();
 
-        final UserListAdapter myListAdapter = new UserListAdapter(getActivity(), R.layout.list_people, userList);
+        myListAdapter = new UserListAdapter(getActivity(), R.layout.list_people, userList);
 
-        myListView = (ListView) view.findViewById(R.id.familyList);
+        myListView = view.findViewById(R.id.familyList);
         myListView.setAdapter(myListAdapter);
+
+        populateListView();
+
+        progressDialog.setMessage("Loading...");
+
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (this.isVisible()) {
+//                progressDialog.show();
+                getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.GONE);
+//                populateListView();
+            populateListView();
+        }
+
+        if (!isVisibleToUser && isAdded())  {
+            /* isAdded is to check whether the fragment is present before calling getActivity()
+            See: https://stackoverflow.com/questions/11631408/android-fragment-getactivity-sometimes-returns-null  */
+                getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void populateListView(){
+
+        userList.clear();
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -84,21 +118,7 @@ public class fragment_main_family extends Fragment{
             }
 
         });
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-        if (this.isVisible()) {
-                getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.GONE);
-        }
-
-        if (!isVisibleToUser && isAdded())  {
-            /* isAdded is to check whether the fragment is present before calling getActivity()
-            See: https://stackoverflow.com/questions/11631408/android-fragment-getactivity-sometimes-returns-null  */
-                getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.VISIBLE);
-        }
+        progressDialog.dismiss();
     }
 
 }
