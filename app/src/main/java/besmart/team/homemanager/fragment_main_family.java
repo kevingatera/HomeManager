@@ -68,7 +68,7 @@ public class fragment_main_family extends Fragment{
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        if (this.isVisible()) {
+        if (this.isVisible() && isAdded()) {
             getActivity().findViewById(R.id.fabAddLayout).setVisibility(View.GONE);
         }
 
