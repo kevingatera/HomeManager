@@ -74,11 +74,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         // Check if the username is empty
         if(TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please enter your email.", Toast.LENGTH_LONG).show();
+            return;
         }
 
         // Check if the password is empty
-        if(TextUtils.isEmpty(email)) {
+        if(TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please enter your password.", Toast.LENGTH_LONG).show();
+            return;
         }
 
         progressDialog.setMessage("Logging in... Please wait.");

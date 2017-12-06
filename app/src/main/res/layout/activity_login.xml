@@ -19,15 +19,18 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-    <ScrollView
+    <LinearLayout
         android:id="@+id/login_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="400dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="581dp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
             android:orientation="vertical">
 
             <TextView
@@ -52,14 +55,14 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:paddingTop="20dp"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp">
 
                 <EditText
                     android:id="@+id/password"
@@ -70,7 +73,6 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:paddingTop="20sp"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
@@ -88,10 +90,12 @@
                 android:id="@+id/invtationToRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="50dp"
+                android:layout_marginBottom="50sp"
+                android:layout_marginTop="50sp"
+                android:gravity="center"
                 android:text="@string/invitation_to_register"
                 android:textAlignment="center" />
 
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 </LinearLayout>
