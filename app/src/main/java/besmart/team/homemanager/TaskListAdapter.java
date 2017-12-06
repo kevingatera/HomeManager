@@ -36,6 +36,7 @@ import static android.content.ContentValues.TAG;
 
 public class TaskListAdapter extends ArrayAdapter<Task> {
 
+    private final fragment_main_tasks myFragment;
     Context myContext;
     int resource;
     ArrayList<Task> taskList;
@@ -43,8 +44,9 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-    public TaskListAdapter(Context myContext, int resource, ArrayList<Task> taskList){
+    public TaskListAdapter(Context myContext, int resource, ArrayList<Task> taskList, fragment_main_tasks myFragment){
         super(myContext, resource, taskList);
+        this.myFragment = myFragment;
         this.myContext = myContext;
         this.resource = resource;
         this.taskList = taskList;
@@ -64,13 +66,16 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         taskName.setText(t.getTitle());
         taskDueDate.setText("Due date: " + t.getDueDate());
 
+        if(!t.getStatus().equals("incomplete")){
+            view.findViewById(R.id.buttonTaskDone).setVisibility(View.GONE);
+        }
+
         view.findViewById(R.id.buttonTaskDone).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /* Called when the user clicks on a list item's done button */
 
-                Task task = taskList.get(position);
-
+                // Add a listener to the buttton
                 userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     Task task = taskList.get(position);
                     @Override
@@ -82,19 +87,23 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                                 break;
                             }
 
-                            if (c.getEmail().equals(user.getEmail())) {
+                            if (c.getEmail().equals(user.getEmail()) && task.getStatus().equals("incomplete")) {
+                                System.out.println(c.getEmail() + " " + user.getEmail());
+                                System.out.println("Position : " + position + " and Size : " + taskList.size());
                                 FirebaseDatabase.getInstance().getReference("/task/").child(task.getId()).child("status").setValue("complete");
-                                taskList.remove(position);
-                                task.setStatus("completed");
-                                taskList.add(task);
+//                                taskList.remove(position);
+                                task.setStatus("complete");
+//                                taskList.add(task);
 
-                                System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY " + FirebaseDatabase.getInstance().getReference("/task").child(task.getId()).getRef());
                                 // Increase the child score
                                 c.incScore(task.getScore());
                                 userRef.child(child.getKey()).setValue(c);
+
+                                Toast.makeText(getContext(), "CONGRATULATIONS! You've earned " + task.getScore() + " points.", Toast.LENGTH_LONG).show();
                             }
                         }
                         notifyDataSetChanged();
+                        myFragment.reloadView();
                     }
 
                     @Override
@@ -103,13 +112,8 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                         Log.w(TAG, "Failed to read value.", databaseError.toException());
                     }
                 });
-
-                notifyDataSetChanged();
-                Toast.makeText(getContext(), "CONGRATULATIONS! You've earned " + task.getScore() + " points.", Toast.LENGTH_LONG).show();
             }
         });
-
-        this.notifyDataSetChanged();
 
 
         view.findViewById(R.id.taskRowView).setOnClickListener(new View.OnClickListener() {
@@ -136,6 +140,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                 modalDueDate.setText(t.getDueDate());
                 modalAssignee.setText(t.getAssigneeName());
 
+
                 mBuilder.setView(mView);
                 final AlertDialog taskDetailsDialog = mBuilder.create();
 
@@ -146,25 +151,44 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                         (FirebaseDatabase.getInstance().getReference("/task")).child(toBeRemoved.getId()).removeValue();
                         taskList.remove(toBeRemoved);
                         notifyDataSetChanged();
+
                         taskDetailsDialog.dismiss();
                     }
                 });
 
-                modifyButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Task toBeModified = taskList.get(position);
-                        Intent i = new Intent(getContext(), TaskActivity.class);
-                        i.putExtra("Title", toBeModified.getTitle());
-                        i.putExtra("Description", toBeModified.getDescription());
-                        i.putExtra("Due Date", toBeModified.getDueDate());
-                        i.putExtra("Score", toBeModified.getScore());
-                        i.putExtra("ID", toBeModified.getId());
-                        i.putExtra("AssigneeName", toBeModified.getAssigneeName());
-                        ((Activity) getContext()).startActivityForResult(i, 22);
-                        taskDetailsDialog.dismiss();
-                    }
-                });
+                if(t.getStatus().equals("complete")) {
+                    modifyButton.setText("RESET");
+                    modifyButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // Add a reset button to the task
+                            Task t = taskList.get(position);
+                            FirebaseDatabase.getInstance().getReference("/task/").child(t.getId()).child("status").setValue("incomplete");
+                            taskDetailsDialog.dismiss();
+                            Toast.makeText(getContext(), "The Task is now in set as incomplete", Toast.LENGTH_LONG).show();
+                            myFragment.reloadView();
+
+                        }
+                    });
+                }
+
+                if(modifyButton.getText().equals("MODIFY")){
+                    modifyButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Task toBeModified = taskList.get(position);
+                            Intent i = new Intent(getContext(), TaskActivity.class);
+                            i.putExtra("Title", toBeModified.getTitle());
+                            i.putExtra("Description", toBeModified.getDescription());
+                            i.putExtra("Due Date", toBeModified.getDueDate());
+                            i.putExtra("Score", toBeModified.getScore());
+                            i.putExtra("ID", toBeModified.getId());
+                            i.putExtra("AssigneeName", toBeModified.getAssigneeName());
+                            ((Activity) getContext()).startActivityForResult(i, 22);
+                            taskDetailsDialog.dismiss();
+                        }
+                    });
+                }
 
                 taskDetailsDialog.show();
             }

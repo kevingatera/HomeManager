@@ -47,11 +47,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(user == null) {
             finish();
+
+            System.out.println("LOGGED OUT !!!!!");
         }
 
         else{
-            Log.e("USER IS", user.toString());
+            Log.w("USER IS", user.toString());
         }
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

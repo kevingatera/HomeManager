@@ -56,8 +56,8 @@ public class fragment_main_tasks extends Fragment{
         myUnassignedTaskList = new ArrayList<>();
 
 
-        myListAdapter = new TaskListAdapter(getActivity(), R.layout.list_task, myAssignedTaskList);
-        myUnassignedListAdapter = new TaskListAdapter(getActivity(), R.layout.list_task, myUnassignedTaskList);
+        myListAdapter = new TaskListAdapter(getActivity(), R.layout.list_task, myAssignedTaskList, fragment_main_tasks.this);
+        myUnassignedListAdapter = new TaskListAdapter(getActivity(), R.layout.list_task, myUnassignedTaskList, fragment_main_tasks.this);
 
 
         myAssignedTaskListView = view.findViewById(R.id.assignedTasksList);
@@ -78,15 +78,17 @@ public class fragment_main_tasks extends Fragment{
                 if(task.getStatus().equals("complete") || task.getAssigneeName().equals("NONE")){
                     if(myAssignedTaskList.indexOf(task) != -1) {
                         myAssignedTaskList.remove(myAssignedTaskList.indexOf(task));
+                    } else{
+                        myUnassignedTaskList.add(task);
                     }
-                    myUnassignedTaskList.add(task);
                 }
 
                 else {
                     if(myUnassignedTaskList.indexOf(task) != -1) {
-                        myUnassignedTaskList.remove(myAssignedTaskList.indexOf(task));
+                        myUnassignedTaskList.remove(myUnassignedTaskList.indexOf(task));
+                    } else {
+                        myAssignedTaskList.add(task);
                     }
-                    myAssignedTaskList.add(task);
                 }
                 myListAdapter.notifyDataSetChanged();
                 myUnassignedListAdapter.notifyDataSetChanged();
@@ -139,14 +141,12 @@ public class fragment_main_tasks extends Fragment{
             reloadView();
         }
 
-        if(resultCode == 3335 && requestCode == 3335) {
-            System.out.println("YOUPIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIYAYAYAAYA");
-        }
     }
 
-    private void reloadView() {
+    public void reloadView() {
         myAssignedTaskList.clear();
         myUnassignedTaskList.clear();
         populate(myRef);
     }
+
 }
