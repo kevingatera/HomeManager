@@ -53,15 +53,6 @@ public class UserListAdapter extends ArrayAdapter<User> {
         notifyDataSetChanged();
 
 
-//        view.findViewById(R.id.buttonTaskDone).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                /* Called when the user clicks on a list item */
-//                Intent intent = new Intent(myContext, TaskActivity.class);
-//                myContext.startActivity(intent);
-//            }
-//        });
-
         return view;
     }
 }

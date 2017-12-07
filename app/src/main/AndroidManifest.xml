@@ -27,9 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShoppingActivity" />
-        <activity android:name=".registration_form" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".family_member_notes"></activity>
+        <activity android:name=".RegistrationActivity"></activity>
     </application>
 
 </manifest>

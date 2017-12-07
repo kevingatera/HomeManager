@@ -91,9 +91,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                                 System.out.println(c.getEmail() + " " + user.getEmail());
                                 System.out.println("Position : " + position + " and Size : " + taskList.size());
                                 FirebaseDatabase.getInstance().getReference("/task/").child(task.getId()).child("status").setValue("complete");
-//                                taskList.remove(position);
                                 task.setStatus("complete");
-//                                taskList.add(task);
 
                                 // Increase the child score
                                 c.incScore(task.getScore());
@@ -172,7 +170,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
                     });
                 }
 
-                if(modifyButton.getText().equals("MODIFY")){
+                if(modifyButton.getText().equals("Modify")){
                     modifyButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

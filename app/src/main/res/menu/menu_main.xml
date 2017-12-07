@@ -1,5 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="besmart.team.homemanager.MainActivity">
 
@@ -8,11 +7,11 @@
         android:checkable="true"
         android:title="@string/only_my_tasks" />-->
 
+
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/addToolMenuButton"
+        android:title="Add tool" />
+
     <item
         android:id="@+id/logOutButton"
         android:onClick="logOut"

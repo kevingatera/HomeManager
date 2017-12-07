@@ -15,10 +15,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Space
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_weight="1" />
+            android:layout_height="3dp"
+            android:layout_marginBottom="10sp"
+            android:layout_marginTop="20sp"
+            android:layout_weight="1"
+            android:text="Enter task details"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -143,6 +149,47 @@
                 android:layout_weight="1" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addToolTotaskButton"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add Tool"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/addRewardButton"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add reward"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/toolListTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tools available: "
+            android:textAppearance="@style/TextAppearance.AppCompat" />
+
+        <TextView
+            android:id="@+id/rewardListTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Rewards available: "
+            android:textAppearance="@style/TextAppearance.AppCompat" />
 
         <Space
             android:layout_width="match_parent"

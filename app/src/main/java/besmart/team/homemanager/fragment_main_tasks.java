@@ -42,8 +42,7 @@ public class fragment_main_tasks extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView2 = inflater.inflate(R.layout.fragment_main_tasks, container, false);
-        return rootView2;
+        return inflater.inflate(R.layout.fragment_main_tasks, container, false);
     }
 
 
@@ -140,7 +139,6 @@ public class fragment_main_tasks extends Fragment{
         if (resultCode == 22 && requestCode == 22){
             reloadView();
         }
-
     }
 
     public void reloadView() {

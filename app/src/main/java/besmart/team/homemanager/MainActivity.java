@@ -1,5 +1,6 @@
 package besmart.team.homemanager;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -10,17 +11,23 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Random;
+
+import besmart.team.homemanager.logic.Tool;
 
 public class MainActivity extends AppCompatActivity {
-
-    private boolean onlyMyTasks = false;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -74,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main2, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
     
@@ -86,20 +93,43 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.addToolMenuButton) {
+
+            final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+            View mView = LayoutInflater.from(this).inflate(R.layout.activity_tools, null);
+
+            final EditText modalTitle = mView.findViewById(R.id.toolTitle);
+            final EditText modalQuantity = mView.findViewById(R.id.toolQuantity);
+
+            Button addButton = mView.findViewById(R.id.addToolButton);
+
+
+            mBuilder.setView(mView);
+            final AlertDialog addToolDetailsDialog = mBuilder.create();
+
+            addButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String name = modalTitle.getText().toString();
+                    String quantity = modalQuantity.getText().toString();
+
+                    Random r = new Random();
+
+                    String id = "tool" + Integer.toString(r.nextInt(999999-100000) + 100000);
+
+                    Tool toBeAdded = new Tool(id, name, quantity);
+
+                    (FirebaseDatabase.getInstance().getReference("/tools")).child(toBeAdded.getId()).setValue(toBeAdded);
+
+                    addToolDetailsDialog.dismiss();
+                }
+            });
+
+            addToolDetailsDialog.show();
+
             return true;
         }
 
-
-        /*
-        if(id ==  R.id.checkable_menu) {
-            onlyMyTasks = !item.isChecked();
-            item.setChecked(onlyMyTasks);
-            findViewById(R.id.unassignedTasksList).setVisibility(View.GONE);
-            findViewById(R.id.unassignedListViewTitle).setVisibility(View.GONE);
-            return true;
-        } */
 
         if(id == R.id.logOutButton) {
             return true;
@@ -187,4 +217,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    public void finish() {
+        FirebaseAuth.getInstance().signOut();
+        super.finish();
+    }
 }
