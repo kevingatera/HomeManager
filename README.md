@@ -1,4 +1,4 @@
-# SEG2505
+# BeSmart HomeManager (SEG2505)
 
 ## Team Members:
 
