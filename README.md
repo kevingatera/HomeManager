@@ -2,7 +2,7 @@
 
 ## Team Members:
 
-Kevin GATERA
+Kevin GATERA (Team Leader)
 
 Alex NISHIMWE
 
